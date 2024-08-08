@@ -2086,7 +2086,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default Scene getScene()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? null : wv.getScene();
 	}
 
@@ -2098,7 +2098,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default List<Player> getPlayers()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? Collections.emptyList() : wv.players()
 			.stream()
 			.collect(Collectors.toCollection(ArrayList::new));
@@ -2112,7 +2112,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default List<NPC> getNpcs()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? Collections.emptyList() : wv.npcs()
 			.stream()
 			.collect(Collectors.toCollection(ArrayList::new));
@@ -2126,7 +2126,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default NPC[] getCachedNPCs()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? new NPC[0] : wv.npcs().getSparse();
 	}
 
@@ -2138,7 +2138,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default Player[] getCachedPlayers()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? new Player[0] : wv.players().getSparse();
 	}
 
@@ -2209,7 +2209,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default int getBaseX()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? 0 : wv.getBaseX();
 	}
 
@@ -2224,7 +2224,7 @@ public interface Client extends OAuthApi, GameEngine
 	@Deprecated
 	default int getBaseY()
 	{
-		var wv = getTopLevelWorldView();
+		WorldView wv = getTopLevelWorldView();
 		return wv == null ? 0 : wv.getBaseY();
 	}
 
