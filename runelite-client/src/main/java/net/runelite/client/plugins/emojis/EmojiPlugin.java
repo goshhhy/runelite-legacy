@@ -65,7 +65,7 @@ public class EmojiPlugin extends Plugin
 			return;
 		}
 
-		var emojis = Emoji.values();
+		Emoji[] emojis = Emoji.values();
 		iconIds = new int[emojis.length];
 
 		for (int i = 0; i < emojis.length; i++)

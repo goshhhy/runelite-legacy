@@ -167,13 +167,13 @@ public class Notifier
 
 	public void notify(String message)
 	{
-		var notif = defaultNotification(TrayIcon.MessageType.NONE);
+		Notification notif = defaultNotification(TrayIcon.MessageType.NONE);
 		notify(notif, message);
 	}
 
 	public void notify(String message, TrayIcon.MessageType type)
 	{
-		var notif = defaultNotification(type);
+		Notification notif = defaultNotification(type);
 		notify(notif, message);
 	}
 
@@ -224,7 +224,7 @@ public class Notifier
 				Toolkit.getDefaultToolkit().beep();
 				break;
 			case CUSTOM:
-				var n = notification;
+				Notification n = notification;
 				executorService.submit(() -> playCustomSound(n));
 		}
 

@@ -615,12 +615,12 @@ public class Hooks implements Callbacks
 		long now = System.currentTimeMillis();
 		if (now > nextError)
 		{
-			var sw = new StringWriter();
+			StringWriter sw = new StringWriter();
 			sw.append(message);
 			if (reason != null)
 			{
 				sw.append(" - ").append(reason.toString()).append('\n');
-				try (var pw = new PrintWriter(sw))
+				try (PrintWriter pw = new PrintWriter(sw))
 				{
 					reason.printStackTrace(pw);
 				}

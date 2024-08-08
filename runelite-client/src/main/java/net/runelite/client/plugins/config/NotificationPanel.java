@@ -264,7 +264,7 @@ class NotificationPanel extends PluginPanel
 		configDescriptor = cd;
 		configItemDescriptor = cid;
 
-		var notif = loadNotification();
+		Notification notif = loadNotification();
 		enabled.setSelected(notif.isOverride());
 
 		rebuild(notif);
@@ -280,82 +280,82 @@ class NotificationPanel extends PluginPanel
 
 		if (notif.isOverride())
 		{
-			var checkboxTray = checkbox(notif.isTray());
+			JCheckBox checkboxTray = checkbox(notif.isTray());
 			checkboxTray.addActionListener(ae ->
 			{
-				var n = loadNotification();
+				Notification n = loadNotification();
 				saveNotification(n.withTray(checkboxTray.isSelected()));
 			});
 			item("Tray notification", "Enables tray notifications", checkboxTray);
 
-			var comboboxRequestFocus = combobox(RequestFocusType.class, notif.getRequestFocus());
+			JComboBox<Enum<RequestFocusType>> comboboxRequestFocus = combobox(RequestFocusType.class, notif.getRequestFocus());
 			comboboxRequestFocus.addItemListener(e ->
 			{
 				if (e.getStateChange() == ItemEvent.SELECTED)
 				{
-					var n = loadNotification();
+					Notification n = loadNotification();
 					saveNotification(n.withRequestFocus((RequestFocusType) comboboxRequestFocus.getSelectedItem()));
 				}
 			});
 			item("Request focus", "Configures the window focus request type on notification", comboboxRequestFocus);
 
-			var comboboxSound = combobox(Notifier.NativeCustomOff.class, notif.getSound());
+			JComboBox<Enum<Notifier.NativeCustomOff>> comboboxSound = combobox(Notifier.NativeCustomOff.class, notif.getSound());
 			comboboxSound.addItemListener(e ->
 			{
 				if (e.getStateChange() == ItemEvent.SELECTED)
 				{
-					var n = loadNotification();
+					Notification n = loadNotification();
 					saveNotification(n.withSound((Notifier.NativeCustomOff) comboboxSound.getSelectedItem()));
 				}
 			});
 			item("Notification sound", "Enables the playing of a beep sound when notifications are displayed", comboboxSound);
 
-			var spinnerVolume = createIntSpinner(0, 100, notif.getVolume(), "%");
+			JSpinner spinnerVolume = createIntSpinner(0, 100, notif.getVolume(), "%");
 			spinnerVolume.addChangeListener(ce ->
 			{
-				var n = loadNotification();
+				Notification n = loadNotification();
 				saveNotification(n.withVolume((int) spinnerVolume.getValue()));
 			});
 			item("Notification volume", "Configures the volume of custom notifications (does not control native volume).", spinnerVolume);
 
-			var spinnerTimeout = createIntSpinner(0, Integer.MAX_VALUE, notif.getTimeout(), "ms");
+			JSpinner spinnerTimeout = createIntSpinner(0, Integer.MAX_VALUE, notif.getTimeout(), "ms");
 			spinnerVolume.addChangeListener(ce ->
 			{
-				var n = loadNotification();
+				Notification n = loadNotification();
 				saveNotification(n.withTimeout((int) spinnerTimeout.getValue()));
 			});
 			item("Notification timeout", "How long notification will be shown in milliseconds. A value of 0 will make it use the system configuration. (Linux only)", spinnerTimeout);
 
-			var checkboxGameMessage = checkbox(notif.isGameMessage());
+			JCheckBox checkboxGameMessage = checkbox(notif.isGameMessage());
 			checkboxGameMessage.addActionListener(ae ->
 			{
-				var n = loadNotification();
+				Notification n = loadNotification();
 				saveNotification(n.withGameMessage(checkboxGameMessage.isSelected()));
 			});
 			item("Game message notification", "Adds a notification message to the chatbox", checkboxGameMessage);
 
-			var comboboxFlash = combobox(FlashNotification.class, notif.getFlash());
+			JComboBox<Enum<FlashNotification>> comboboxFlash = combobox(FlashNotification.class, notif.getFlash());
 			comboboxFlash.addItemListener(e ->
 			{
 				if (e.getStateChange() == ItemEvent.SELECTED)
 				{
-					var n = loadNotification();
+					Notification n = loadNotification();
 					saveNotification(n.withFlash((FlashNotification) comboboxFlash.getSelectedItem()));
 				}
 			});
 			item("Flash", "Flashes the game frame as a notification", comboboxFlash);
 
-			var colorpickerFlashColor = createColorPicker("Flash color", notif.getFlashColor(), c ->
+			ColorJButton colorpickerFlashColor = createColorPicker("Flash color", notif.getFlashColor(), c ->
 			{
-				var n = loadNotification();
+				Notification n = loadNotification();
 				saveNotification(n.withFlashColor(c));
 			});
 			item("Flash color", "Sets the color of the notification flashes.", colorpickerFlashColor);
 
-			var checkboxSendWhenFocused = checkbox(notif.isSendWhenFocused());
+			JCheckBox checkboxSendWhenFocused = checkbox(notif.isSendWhenFocused());
 			checkboxSendWhenFocused.addActionListener(ae ->
 			{
-				var n = loadNotification();
+				Notification n = loadNotification();
 				saveNotification(n.withSendWhenFocused(checkboxSendWhenFocused.isSelected()));
 			});
 			item("Send notifications when focused", "Sends the notification even when the client is focused", checkboxSendWhenFocused);
@@ -372,7 +372,7 @@ class NotificationPanel extends PluginPanel
 					enabled.setSelected(false);
 
 					// Reset every setting
-					var n = new Notification().withEnabled(true);
+					Notification n = new Notification().withEnabled(true);
 					saveNotification(n);
 					rebuild(n);
 				}

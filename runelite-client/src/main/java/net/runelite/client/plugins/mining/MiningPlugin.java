@@ -280,7 +280,7 @@ public class MiningPlugin extends Plugin
 	{
 		if (scriptPreFired.getScriptId() == ScriptID.ADD_OVERLAYTIMER_LOC)
 		{
-			var args = scriptPreFired.getScriptEvent().getArguments();
+			Object[] args = scriptPreFired.getScriptEvent().getArguments();
 			int locCoord = (int) args[1];
 			int locId = (int) args[2];
 			int ticks = (int) args[5];

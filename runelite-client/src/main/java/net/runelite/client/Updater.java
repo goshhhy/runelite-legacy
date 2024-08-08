@@ -234,7 +234,7 @@ class Updater
 				.url(downloadUrl)
 				.build();
 
-			var tempExe = Files.createTempFile("rlupdate", "exe");
+			Path tempExe = Files.createTempFile("rlupdate", "exe");
 			HashCode hash;
 			try (Response response = okHttpClient.newCall(request).execute();
 				HashingOutputStream out = new HashingOutputStream(Hashing.sha256(), Files.newOutputStream(tempExe)))
@@ -273,12 +273,12 @@ class Updater
 
 			log.info("Launching installer");
 
-			var pb = new ProcessBuilder(
+			ProcessBuilder pb = new ProcessBuilder(
 				tempExe.toFile().getAbsolutePath(),
 				"/SILENT"
 			);
 
-			var env = pb.environment();
+			java.util.Map<String, String> env = pb.environment();
 			env.put("RUNELITE_UPGRADE", "1");
 			pb.start();
 

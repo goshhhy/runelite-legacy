@@ -125,7 +125,7 @@ class PrayerReorder
 
 	void reset()
 	{
-		for (var key : configManager.getConfigurationKeys(PrayerConfig.GROUP + ".prayer_order_book"))
+		for (String key : configManager.getConfigurationKeys(PrayerConfig.GROUP + ".prayer_order_book"))
 		{
 			String[] str = key.split("\\.", 2);
 			if (str.length == 2)
@@ -133,7 +133,7 @@ class PrayerReorder
 				configManager.unsetConfiguration(str[0], str[1]);
 			}
 		}
-		for (var key : configManager.getConfigurationKeys(PrayerConfig.GROUP + ".prayer_hidden_book"))
+		for (String key : configManager.getConfigurationKeys(PrayerConfig.GROUP + ".prayer_hidden_book"))
 		{
 			String[] str = key.split("\\.", 2);
 			if (str.length == 2)
@@ -147,7 +147,7 @@ class PrayerReorder
 
 	private int[] getPrayerOrder(int prayerbook)
 	{
-		var s = configManager.getConfiguration(PrayerConfig.GROUP, "prayer_order_book_" + prayerbook);
+		String s = configManager.getConfiguration(PrayerConfig.GROUP, "prayer_order_book_" + prayerbook);
 		if (s == null)
 		{
 			return null;
@@ -159,7 +159,7 @@ class PrayerReorder
 
 	private void setPrayerOrder(int prayerbook, int[] prayers)
 	{
-		var s = Arrays.stream(prayers)
+		String s = Arrays.stream(prayers)
 			.mapToObj(Integer::toString)
 			.collect(Collectors.joining(","));
 		configManager.setConfiguration(PrayerConfig.GROUP, "prayer_order_book_" + prayerbook, s);
@@ -211,7 +211,7 @@ class PrayerReorder
 				// reset dragged on widget to prevent sending a drag widget packet to the server
 				client.setDraggedOnWidget(null);
 
-				var prayerOrder = getPrayerOrder(prayerbook);
+				int[] prayerOrder = getPrayerOrder(prayerbook);
 				if (prayerOrder == null)
 				{
 					prayerOrder = defaultPrayerOrder(getPrayerBookEnum(prayerbook));
@@ -222,7 +222,7 @@ class PrayerReorder
 
 				log.debug("Swapping prayer {}<->{} (idx {}<->{})", fromId, toId, fromIdx, toIdx);
 
-				var tmp = prayerOrder[toIdx];
+				int tmp = prayerOrder[toIdx];
 				prayerOrder[toIdx] = prayerOrder[fromIdx];
 				prayerOrder[fromIdx] = tmp;
 
@@ -251,7 +251,7 @@ class PrayerReorder
 
 	private EnumComposition getPrayerBookEnum(int prayerbook)
 	{
-		var enumId = prayerbook == 1 ? EnumID.PRAYERS_RUINOUS : EnumID.PRAYERS_NORMAL;
+		int enumId = prayerbook == 1 ? EnumID.PRAYERS_RUINOUS : EnumID.PRAYERS_NORMAL;
 		return client.getEnum(enumId);
 	}
 
@@ -261,8 +261,8 @@ class PrayerReorder
 			.boxed() // IntStream does not accept a custom comparator
 			.sorted(Comparator.comparing(id ->
 			{
-				var prayerObjId = prayerEnum.getIntValue(id);
-				var prayerObj = client.getItemDefinition(prayerObjId);
+				int prayerObjId = prayerEnum.getIntValue(id);
+				ItemComposition prayerObj = client.getItemDefinition(prayerObjId);
 				return prayerObj.getIntValue(ParamID.OC_PRAYER_LEVEL);
 			}))
 			.mapToInt(i -> i)
@@ -299,7 +299,7 @@ class PrayerReorder
 	{
 		reordering = state;
 
-		var message = reordering ?
+		String message = reordering ?
 			"Prayer book reordering is now enabled." :
 			"Prayer book reordering is now disabled.";
 
@@ -341,18 +341,18 @@ class PrayerReorder
 
 	private void rebuildPrayers(boolean unlocked)
 	{
-		var prayerbook = client.getVarbitValue(Varbits.PRAYERBOOK);
-		var prayerBookEnum = getPrayerBookEnum(prayerbook);
-		var prayerIds = MoreObjects.firstNonNull(getPrayerOrder(prayerbook), defaultPrayerOrder(prayerBookEnum));
+		int prayerbook = client.getVarbitValue(Varbits.PRAYERBOOK);
+		EnumComposition prayerBookEnum = getPrayerBookEnum(prayerbook);
+		int[] prayerIds = MoreObjects.firstNonNull(getPrayerOrder(prayerbook), defaultPrayerOrder(prayerBookEnum));
 
 		if (isInterfaceOpen(InterfaceID.PRAYER))
 		{
 			int index = 0;
 			for (int prayerId : prayerIds)
 			{
-				var prayerObjId = prayerBookEnum.getIntValue(prayerId);
-				var prayerObj = client.getItemDefinition(prayerObjId);
-				var prayerWidget = client.getWidget(prayerObj.getIntValue(ParamID.OC_PRAYER_COMPONENT));
+				int prayerObjId = prayerBookEnum.getIntValue(prayerId);
+				ItemComposition prayerObj = client.getItemDefinition(prayerObjId);
+				Widget prayerWidget = client.getWidget(prayerObj.getIntValue(ParamID.OC_PRAYER_COMPONENT));
 
 				assert prayerWidget != null;
 
@@ -424,7 +424,7 @@ class PrayerReorder
 				return;
 			}
 
-			var sortedPrayers = defaultPrayerOrder(prayerBookEnum);
+			int[] sortedPrayers = defaultPrayerOrder(prayerBookEnum);
 			int index = 0;
 			for (int prayerId : prayerIds)
 			{
@@ -468,9 +468,9 @@ class PrayerReorder
 			&& menuOptionClicked.getId() == 4
 			&& ("Hide".equals(menuOptionClicked.getMenuOption()) || "Unhide".equals(menuOptionClicked.getMenuOption())))
 		{
-			var widget = menuOptionClicked.getWidget();
-			var prayerbook = client.getVarbitValue(Varbits.PRAYERBOOK);
-			var prayerId = findPrayerIdFromComponent(prayerbook, widget);
+			Widget widget = menuOptionClicked.getWidget();
+			int prayerbook = client.getVarbitValue(Varbits.PRAYERBOOK);
+			int prayerId = findPrayerIdFromComponent(prayerbook, widget);
 			if (prayerId != -1)
 			{
 				// child 0 is the background if the prayer is active.

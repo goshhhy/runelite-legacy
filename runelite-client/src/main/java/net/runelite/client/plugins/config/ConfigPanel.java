@@ -671,8 +671,8 @@ class ConfigPanel extends PluginPanel
 		button.setPreferredSize(new Dimension(25, 0));
 		button.addActionListener(l ->
 		{
-			var muxer = pluginList.getMuxer();
-			var notifPanel = notificationPanelProvider.get();
+			net.runelite.client.ui.MultiplexingPluginPanel muxer = pluginList.getMuxer();
+			NotificationPanel notifPanel = notificationPanelProvider.get();
 			notifPanel.init(cd, cid);
 			muxer.pushState(notifPanel);
 		});

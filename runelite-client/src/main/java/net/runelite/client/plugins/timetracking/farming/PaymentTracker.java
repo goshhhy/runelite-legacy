@@ -99,11 +99,11 @@ public class PaymentTracker
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked opt)
 	{
-		var action = opt.getMenuAction();
+		MenuAction action = opt.getMenuAction();
 		// look for resume_pausebutton from click
 		if (action == MenuAction.WIDGET_CONTINUE)
 		{
-			var w = opt.getWidget();
+			Widget w = opt.getWidget();
 			if (w != null && w.getId() == ComponentID.DIALOG_OPTION_OPTIONS && w.getIndex() > -1 && isPatchOption(w.getText()))
 			{
 				lastSelectedOption = w.getIndex() - 1; // subid 0 is "Select an Option"
@@ -129,7 +129,7 @@ public class PaymentTracker
 			int componentId = intStack[0];
 			int subId = intStack[1];
 
-			var w = client.getWidget(componentId).getChild(subId);
+			Widget w = client.getWidget(componentId).getChild(subId);
 			if (componentId == ComponentID.DIALOG_OPTION_OPTIONS && subId > -1 && isPatchOption(w.getText()))
 			{
 				lastSelectedOption = subId - 1; // subid 0 is "Select an Option"

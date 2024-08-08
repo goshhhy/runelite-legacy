@@ -81,10 +81,10 @@ class ClientToolbarPanel extends JPanel
 
 		if (nb.getPopup() != null)
 		{
-			var menu = new JPopupMenu();
+			JPopupMenu menu = new JPopupMenu();
 			nb.getPopup().forEach((name, cb) ->
 			{
-				var menuItem = new JMenuItem(name);
+				JMenuItem menuItem = new JMenuItem(name);
 				menuItem.addActionListener(e -> cb.run());
 				menu.add(menuItem);
 			});

@@ -249,8 +249,8 @@ public class GroundMarkerPlugin extends Plugin
 
 			final WorldPoint worldPoint = WorldPoint.fromLocalInstance(client, selectedSceneTile.getLocalLocation());
 			final int regionId = worldPoint.getRegionID();
-			var regionPoints = getPoints(regionId);
-			var existingOpt = regionPoints.stream()
+			Collection<GroundMarkerPoint> regionPoints = getPoints(regionId);
+			Optional<GroundMarkerPoint> existingOpt = regionPoints.stream()
 				.filter(p -> p.getRegionX() == worldPoint.getRegionX() && p.getRegionY() == worldPoint.getRegionY() && p.getZ() == worldPoint.getPlane())
 				.findFirst();
 
@@ -269,7 +269,7 @@ public class GroundMarkerPlugin extends Plugin
 
 			if (existingOpt.isPresent())
 			{
-				var existing = existingOpt.get();
+				GroundMarkerPoint existing = existingOpt.get();
 
 				client.createMenuEntry(-2)
 					.setOption("Label")
@@ -292,7 +292,7 @@ public class GroundMarkerPlugin extends Plugin
 							chatboxPanelManager.openTextMenuInput("Are you sure you want to reset the color of " + regionPoints.size() + " tiles?")
 								.option("Yes", () ->
 								{
-									var newPoints = regionPoints.stream()
+									List<GroundMarkerPoint> newPoints = regionPoints.stream()
 										.map(p -> new GroundMarkerPoint(p.getRegionId(), p.getRegionX(), p.getRegionY(), p.getZ(), config.markerColor(), p.getLabel()))
 										.collect(Collectors.toList());
 									savePoints(regionId, newPoints);
@@ -318,7 +318,7 @@ public class GroundMarkerPlugin extends Plugin
 						});
 					});
 
-				var existingColors = points.stream()
+				List<Color> existingColors = points.stream()
 					.map(ColorTileMarker::getColor)
 					.distinct()
 					.collect(Collectors.toList());
@@ -389,7 +389,7 @@ public class GroundMarkerPlugin extends Plugin
 			{
 				input = Strings.emptyToNull(input);
 
-				var newPoint = new GroundMarkerPoint(existing.getRegionId(), existing.getRegionX(), existing.getRegionY(), existing.getZ(), existing.getColor(), input);
+				GroundMarkerPoint newPoint = new GroundMarkerPoint(existing.getRegionId(), existing.getRegionX(), existing.getRegionY(), existing.getZ(), existing.getColor(), input);
 				Collection<GroundMarkerPoint> points = new ArrayList<>(getPoints(existing.getRegionId()));
 				points.remove(existing);
 				points.add(newPoint);
@@ -402,7 +402,7 @@ public class GroundMarkerPlugin extends Plugin
 
 	private void colorTile(GroundMarkerPoint existing, Color newColor)
 	{
-		var newPoint = new GroundMarkerPoint(existing.getRegionId(), existing.getRegionX(), existing.getRegionY(), existing.getZ(), newColor, existing.getLabel());
+		GroundMarkerPoint newPoint = new GroundMarkerPoint(existing.getRegionId(), existing.getRegionX(), existing.getRegionY(), existing.getZ(), newColor, existing.getLabel());
 		Collection<GroundMarkerPoint> points = new ArrayList<>(getPoints(existing.getRegionId()));
 		points.remove(newPoint);
 		points.add(newPoint);

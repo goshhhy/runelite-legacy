@@ -136,7 +136,7 @@ public class SpellbookPlugin extends Plugin
 	@Override
 	public void resetConfiguration()
 	{
-		for (var key : configManager.getConfigurationKeys(SpellbookConfig.GROUP + ".spell_"))
+		for (String key : configManager.getConfigurationKeys(SpellbookConfig.GROUP + ".spell_"))
 		{
 			String[] str = key.split("\\.", 2);
 			if (str.length == 2)
@@ -181,7 +181,7 @@ public class SpellbookPlugin extends Plugin
 	{
 		reordering = state;
 
-		var message = reordering ?
+		String message = reordering ?
 			"Spell book reordering is now enabled." :
 			"Spell book reordering is now disabled.";
 
@@ -450,8 +450,8 @@ public class SpellbookPlugin extends Plugin
 			.boxed()
 			.sorted((idx1, idx2) ->
 			{
-				var i1 = client.getItemDefinition(spellbook.getIntValue(idx1));
-				var i2 = client.getItemDefinition(spellbook.getIntValue(idx2));
+				ItemComposition i1 = client.getItemDefinition(spellbook.getIntValue(idx1));
+				ItemComposition i2 = client.getItemDefinition(spellbook.getIntValue(idx2));
 				int l1 = i1.getIntValue(ParamID.SPELL_LEVELREQ);
 				int l2 = i2.getIntValue(ParamID.SPELL_LEVELREQ);
 				return Integer.compare(l1, l2);

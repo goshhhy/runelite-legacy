@@ -120,8 +120,8 @@ class WoodcuttingSceneOverlay extends Overlay
 	{
 		if (!plugin.getSaplingIngredients().isEmpty() && config.highlightMulch())
 		{
-			var order = plugin.getSaplingOrder();
-			var sb = new StringBuilder();
+			GameObject[] order = plugin.getSaplingOrder();
+			StringBuilder sb = new StringBuilder();
 
 			graphics.setFont(FontManager.getRunescapeBoldFont().deriveFont(16f));
 
@@ -186,14 +186,14 @@ class WoodcuttingSceneOverlay extends Overlay
 					continue;
 				}
 
-				var poly = ingredient.getCanvasTilePoly();
+				Polygon poly = ingredient.getCanvasTilePoly();
 				if (poly != null)
 				{
 					OverlayUtil.renderPolygon(graphics, poly, color);
 				}
 
-				var text = sb.toString();
-				var textLocation = ingredient.getCanvasTextLocation(graphics, text, 0);
+				String text = sb.toString();
+				Point textLocation = ingredient.getCanvasTextLocation(graphics, text, 0);
 				if (textLocation != null)
 				{
 					OverlayUtil.renderTextLocation(graphics, textLocation, text, Color.WHITE);
@@ -206,7 +206,7 @@ class WoodcuttingSceneOverlay extends Overlay
 	{
 		if (!plugin.getFlowers().isEmpty() && config.highlightFlowers())
 		{
-			var activeFlowers = plugin.getActiveFlowers();
+			List<NPC> activeFlowers = plugin.getActiveFlowers();
 			for (NPC flower : plugin.getFlowers())
 			{
 				if (activeFlowers.size() == 2 && !activeFlowers.contains(flower))

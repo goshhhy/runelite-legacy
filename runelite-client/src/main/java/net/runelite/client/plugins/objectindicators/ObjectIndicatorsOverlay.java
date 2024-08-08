@@ -75,14 +75,14 @@ class ObjectIndicatorsOverlay extends Overlay
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
-		var objects = plugin.getObjects();
+		java.util.List<ColorTileObject> objects = plugin.getObjects();
 		if (objects.isEmpty())
 		{
 			return null;
 		}
 
 		Stroke stroke = new BasicStroke((float) config.borderWidth());
-		final var defaultFlags =
+		final int defaultFlags =
 			(config.highlightHull() ? HF_HULL : 0) |
 			(config.highlightOutline() ? HF_OUTLINE : 0) |
 			(config.highlightClickbox() ? HF_CLICKBOX : 0) |
@@ -118,7 +118,7 @@ class ObjectIndicatorsOverlay extends Overlay
 				borderColor = config.markerColor();
 			}
 
-			final var flags = obj.getHighlightFlags() != 0 ? obj.getHighlightFlags() : defaultFlags;
+			final int flags = obj.getHighlightFlags() != 0 ? obj.getHighlightFlags() : defaultFlags;
 			if ((flags & HF_HULL) != 0)
 			{
 				// default hull fill color is a=50 while the clickbox and tiles are a/12

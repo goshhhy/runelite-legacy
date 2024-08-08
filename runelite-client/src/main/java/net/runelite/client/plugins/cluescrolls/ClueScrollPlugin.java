@@ -695,7 +695,7 @@ public class ClueScrollPlugin extends Plugin
 	{
 		if (developerMode && commandExecuted.getCommand().equalsIgnoreCase("clue"))
 		{
-			var text = String.join(" ", commandExecuted.getArguments());
+			String text = String.join(" ", commandExecuted.getArguments());
 
 			if (text.isEmpty())
 			{
@@ -1261,9 +1261,9 @@ public class ClueScrollPlugin extends Plugin
 		EnumComposition members = client.getEnum(EnumID.POH_COSTUME_MEMBERS);
 		EnumComposition alt = client.getEnum(EnumID.POH_COSTUME_ALTERNATE);
 		EnumComposition alts = client.getEnum(EnumID.POH_COSTUME_ALTERNATES);
-		for (var tierEnumId : enums)
+		for (int tierEnumId : enums)
 		{
-			var tierEnum = client.getEnum(tierEnumId);
+			EnumComposition tierEnum = client.getEnum(tierEnumId);
 			for (int baseItem : tierEnum.getIntVals())
 			{
 				if (baseItem == itemId)
@@ -1275,7 +1275,7 @@ public class ClueScrollPlugin extends Plugin
 				if (membersEnumId != -1)
 				{
 					// check members in the group
-					var memberEnum = client.getEnum(membersEnumId);
+					EnumComposition memberEnum = client.getEnum(membersEnumId);
 					for (int memberItem : memberEnum.getIntVals())
 					{
 						if (memberItem == itemId)
@@ -1312,7 +1312,7 @@ public class ClueScrollPlugin extends Plugin
 		int altsEnumId = alts.getIntValue(checkItemId);
 		if (altsEnumId != -1)
 		{
-			var e = client.getEnum(altsEnumId);
+			EnumComposition e = client.getEnum(altsEnumId);
 			for (int item : e.getIntVals())
 			{
 				if (item == targetItemId)

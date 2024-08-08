@@ -139,7 +139,7 @@ class OpenCLManager
 		CL.create();
 		initialized = true;
 
-		try (var stack = MemoryStack.stackPush())
+		try (MemoryStack stack = MemoryStack.stackPush())
 		{
 			if (OSType.getOSType() == OSType.MacOS)
 			{
@@ -317,12 +317,12 @@ class OpenCLManager
 			.flip();
 
 		IntBuffer errcode_ret = stack.callocInt(1);
-		var devices = stack.mallocPointer(0);
+		PointerBuffer devices = stack.mallocPointer(0);
 		long context = clCreateContext(ctxProps, devices, CLContextCallback.create((errinfo, private_info, cb, user_data) ->
 			log.error("[LWJGL] cl_context_callback: {}", memUTF8(errinfo))), NULL, errcode_ret);
 		checkCLError(errcode_ret);
 
-		var deviceBuf = stack.mallocPointer(1);
+		PointerBuffer deviceBuf = stack.mallocPointer(1);
 		checkCLError(clGetGLContextInfoAPPLE(context, awtContext.getGLContext(), CL_CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE, deviceBuf, null));
 		long device = deviceBuf.get(0);
 
@@ -488,7 +488,7 @@ class OpenCLManager
 			PointerBuffer acquireEvent = stack.mallocPointer(1);
 			CL10GL.clEnqueueAcquireGLObjects(commandQueue, glBuffers, null, acquireEvent);
 
-			var computeEvents = stack.mallocPointer(3);
+			PointerBuffer computeEvents = stack.mallocPointer(3);
 			if (unorderedModels > 0)
 			{
 				CL12.clSetKernelArg1p(kernelUnordered, 0, unorderedBuffer.clBuffer);

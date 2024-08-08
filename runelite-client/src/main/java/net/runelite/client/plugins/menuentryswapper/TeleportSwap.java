@@ -36,7 +36,7 @@ class TeleportSwap
 
 	TeleportSwap addSub(String option, Runnable r)
 	{
-		var sub = new TeleportSub();
+		TeleportSub sub = new TeleportSub();
 		sub.option = option;
 		sub.execute = r;
 		subs.add(sub);

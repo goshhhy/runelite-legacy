@@ -197,7 +197,7 @@ public class FishingPlugin extends Plugin
 			return;
 		}
 
-		var message = event.getMessage();
+		String message = event.getMessage();
 		if (FISHING_CATCH_REGEX.matcher(message).find())
 		{
 			session.setLastFishCaught(Instant.now());

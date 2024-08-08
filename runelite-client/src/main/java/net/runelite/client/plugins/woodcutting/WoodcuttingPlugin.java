@@ -236,7 +236,7 @@ public class WoodcuttingPlugin extends Plugin
 			return;
 		}
 
-		final var msg = event.getMessage();
+		final String msg = event.getMessage();
 
 		if (WOOD_CUT_PATTERN.matcher(msg).matches())
 		{
@@ -249,7 +249,7 @@ public class WoodcuttingPlugin extends Plugin
 			session.incrementLogsCut();
 		}
 
-		var matcher = ANIMA_BARK_PATTERN.matcher(msg);
+		java.util.regex.Matcher matcher = ANIMA_BARK_PATTERN.matcher(msg);
 		if (matcher.matches())
 		{
 			if (session == null)
@@ -426,7 +426,7 @@ public class WoodcuttingPlugin extends Plugin
 	{
 		if (scriptPreFired.getScriptId() == ScriptID.ADD_OVERLAYTIMER_LOC)
 		{
-			var args = scriptPreFired.getScriptEvent().getArguments();
+			Object[] args = scriptPreFired.getScriptEvent().getArguments();
 			int locCoord = (int) args[1];
 			int locId = (int) args[2];
 			int ticks = (int) args[5];
@@ -613,10 +613,10 @@ public class WoodcuttingPlugin extends Plugin
 	@Subscribe
 	public void onAnimationChanged(final AnimationChanged event)
 	{
-		var actor = event.getActor();
+		net.runelite.api.Actor actor = event.getActor();
 		if (actor.getAnimation() == AnimationID.LOOKING_INTO && flowers.contains(actor.getInteracting()))
 		{
-			var flower = (NPC) actor.getInteracting();
+			NPC flower = (NPC) actor.getInteracting();
 			if (!activeFlowers.contains(flower))
 			{
 				if (activeFlowers.size() == 2)
@@ -635,7 +635,7 @@ public class WoodcuttingPlugin extends Plugin
 	public void onNpcSpawned(NpcSpawned event)
 	{
 		NPC npc = event.getNpc();
-		var id = npc.getId();
+		int id = npc.getId();
 		if (isFloweringBush(id))
 		{
 			if (flowers.isEmpty())
@@ -753,7 +753,7 @@ public class WoodcuttingPlugin extends Plugin
 		}
 
 		int s = 0;
-		for (var npc : circles)
+		for (NPC npc : circles)
 		{
 			int off = npc.getId() - NpcID.RITUAL_CIRCLE_GREEN;
 			int shape = off / 4;
@@ -761,7 +761,7 @@ public class WoodcuttingPlugin extends Plugin
 			int id = (16 << shape) | (1 << color);
 			s ^= id;
 		}
-		for (var npc : circles)
+		for (NPC npc : circles)
 		{
 			int off = npc.getId() - NpcID.RITUAL_CIRCLE_GREEN;
 			int shape = off / 4;

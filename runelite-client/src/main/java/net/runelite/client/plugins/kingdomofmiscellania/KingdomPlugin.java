@@ -238,7 +238,7 @@ public class KingdomPlugin extends Plugin
 	private static int getNumbersOfDaysPassed(Instant lastChanged)
 	{
 		lastChanged = lastChanged.truncatedTo(ChronoUnit.DAYS);
-		var now = Instant.now().truncatedTo(ChronoUnit.DAYS);
+		Instant now = Instant.now().truncatedTo(ChronoUnit.DAYS);
 		return (int) Duration.between(lastChanged, now).toDays();
 	}
 

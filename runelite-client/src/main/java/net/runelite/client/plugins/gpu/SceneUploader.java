@@ -70,7 +70,7 @@ class SceneUploader
 		this.client = client;
 		this.gpuConfig = config;
 
-		try (var in = SceneUploader.class.getResourceAsStream("regions/regions.txt"))
+		try (java.io.InputStream in = SceneUploader.class.getResourceAsStream("regions/regions.txt"))
 		{
 			regions = new Regions(in, "regions.txt");
 		}

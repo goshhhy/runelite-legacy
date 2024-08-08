@@ -271,7 +271,7 @@ public class WorldMapPlugin extends Plugin
 					MapElementConfig config = client.getMapElementConfig(icon.getType());
 					if (config.getCategory() == CATEGORY_QUEST)
 					{
-						var quests = client.getDBRowsByValue(DBTableID.Quest.TABLE, DBTableID.Quest.MAP_ELEMENT, 0, icon.getType());
+						java.util.List<Integer> quests = client.getDBRowsByValue(DBTableID.Quest.TABLE, DBTableID.Quest.MAP_ELEMENT, 0, icon.getType());
 						for (int questID : quests)
 						{
 							if (client.getDBTableField(questID, DBTableID.Quest.MAIN_QUEST, 0).length > 0)

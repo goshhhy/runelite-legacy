@@ -348,7 +348,7 @@ public class InterfaceStylesPlugin extends Plugin
 
 	private void adjustWidgetDimensions()
 	{
-		var skin = config.skin();
+		Skin skin = config.skin();
 		if (skin == Skin.DEFAULT)
 		{
 			return;

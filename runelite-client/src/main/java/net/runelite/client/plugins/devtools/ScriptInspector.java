@@ -123,7 +123,7 @@ public class ScriptInspector extends DevToolsFrame
 					output += "[" + source.getIndex() + "]";
 				}
 
-				var name = WidgetInspector.getWidgetName(id);
+				String name = WidgetInspector.getWidgetName(id);
 				if (name != null)
 				{
 					output += " " + name;

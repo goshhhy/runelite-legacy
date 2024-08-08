@@ -128,7 +128,7 @@ public class LayoutManager
 				bankItems.add(c.getItemId());
 				if (log.isDebugEnabled())
 				{
-					var def = itemManager.getItemComposition(c.getItemId());
+					ItemComposition def = itemManager.getItemComposition(c.getItemId());
 					log.debug("Bank contains {}{}", def.getName(), def.getPlaceholderId() > -1 && def.getPlaceholderTemplateId() > -1 ? " (placeholder)" : "");
 				}
 				c.setHidden(true);
@@ -167,8 +167,8 @@ public class LayoutManager
 
 					if (log.isDebugEnabled())
 					{
-						var from = itemManager.getItemComposition(itemId);
-						var to = itemManager.getItemComposition(matchedId);
+						ItemComposition from = itemManager.getItemComposition(itemId);
+						ItemComposition to = itemManager.getItemComposition(matchedId);
 						log.debug("Matched {}{} -> {}{}",
 							from.getName(), from.getPlaceholderId() > -1 && from.getPlaceholderTemplateId() > -1 ? " (placeholder)" : "",
 							to.getName(), to.getPlaceholderId() > -1 && to.getPlaceholderTemplateId() > -1 ? " (placeholder)" : ""

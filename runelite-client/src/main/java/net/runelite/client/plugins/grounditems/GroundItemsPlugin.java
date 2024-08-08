@@ -563,7 +563,7 @@ public class GroundItemsPlugin extends Plugin
 						colorPicker.setVisible(true);
 					}));
 
-			var colors = Stream.concat(
+			List<Color> colors = Stream.concat(
 					collectedGroundItems.values().stream()
 						.map(GroundItem::getColor)
 						.filter(Objects::nonNull),
@@ -612,7 +612,7 @@ public class GroundItemsPlugin extends Plugin
 	private Color getHighlighted(GroundItem groundItem)
 	{
 		Color itemColor = getItemColor(groundItem.getItemId());
-		var item = new NamedQuantity(groundItem);
+		NamedQuantity item = new NamedQuantity(groundItem);
 		if (TRUE.equals(highlightedItems.getUnchecked(item)))
 		{
 			return itemColor != null ? itemColor : config.highlightedColor();
@@ -644,7 +644,7 @@ public class GroundItemsPlugin extends Plugin
 
 	private Color getHidden(GroundItem groundItem)
 	{
-		var item = new NamedQuantity(groundItem);
+		NamedQuantity item = new NamedQuantity(groundItem);
 		final boolean isExplicitHidden = TRUE.equals(hiddenItems.getUnchecked(item));
 		final boolean isExplicitHighlight = TRUE.equals(highlightedItems.getUnchecked(item));
 		final boolean canBeHidden = groundItem.getGePrice() > 0 || groundItem.isTradeable() || !config.dontHideUntradeables();

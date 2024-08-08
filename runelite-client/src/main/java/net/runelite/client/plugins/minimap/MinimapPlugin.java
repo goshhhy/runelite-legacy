@@ -91,7 +91,7 @@ public class MinimapPlugin extends Plugin
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged event)
 	{
-		var state = event.getGameState();
+		GameState state = event.getGameState();
 		if (state == GameState.STARTING)
 		{
 			originalDotSprites = null;

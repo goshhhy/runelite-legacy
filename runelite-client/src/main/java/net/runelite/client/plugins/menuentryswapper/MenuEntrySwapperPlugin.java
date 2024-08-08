@@ -881,7 +881,7 @@ public class MenuEntrySwapperPlugin extends Plugin
 
 					if (config.teleportSubmenus())
 					{
-						var subSwaps = teleportSwaps.get(itemComposition.getId())
+						List<TeleportSwap> subSwaps = teleportSwaps.get(itemComposition.getId())
 							.stream()
 							.filter(ts -> ts.worn)
 							.collect(Collectors.toList());
@@ -1067,7 +1067,7 @@ public class MenuEntrySwapperPlugin extends Plugin
 
 				if (config.teleportSubmenus())
 				{
-					var subSwaps = teleportSwaps.get(itemComposition.getId())
+					List<TeleportSwap> subSwaps = teleportSwaps.get(itemComposition.getId())
 						.stream()
 						.filter(ts -> ts.held)
 						.collect(Collectors.toList());
@@ -1346,14 +1346,14 @@ public class MenuEntrySwapperPlugin extends Plugin
 
 	private boolean testOpMask(Widget w, int op)
 	{
-		var n = client.getWidgetFlags().get((long) w.getId() << 32 | w.getIndex());
+		net.runelite.api.IntegerNode n = client.getWidgetFlags().get((long) w.getId() << 32 | w.getIndex());
 		int mask = n != null ? n.getValue() : w.getClickMask();
 		return (mask >> op + 1 & 1) != 0;
 	}
 
 	private boolean isOpTarget(Widget w)
 	{
-		var n = client.getWidgetFlags().get((long) w.getId() << 32 | w.getIndex());
+		net.runelite.api.IntegerNode n = client.getWidgetFlags().get((long) w.getId() << 32 | w.getIndex());
 		int mask = n != null ? n.getValue() : w.getClickMask();
 		return (mask & (WidgetConfig.USE_GROUND_ITEM | WidgetConfig.USE_NPC | WidgetConfig.USE_OBJECT | WidgetConfig.USE_PLAYER | WidgetConfig.USE_ITEM | WidgetConfig.USE_WIDGET)) != 0;
 	}
@@ -2110,7 +2110,7 @@ public class MenuEntrySwapperPlugin extends Plugin
 	private TeleportSwap teleportSwap(String option, int... items)
 	{
 		Preconditions.checkArgument(items.length > 0, "no items");
-		var ts = new TeleportSwap();
+		TeleportSwap ts = new TeleportSwap();
 		ts.option = option;
 		for (int item : items)
 		{
@@ -2122,11 +2122,11 @@ public class MenuEntrySwapperPlugin extends Plugin
 	@Subscribe
 	public void onMenuEntryAdded(MenuEntryAdded menuEntryAdded)
 	{
-		var me = menuEntryAdded.getMenuEntry();
+		MenuEntry me = menuEntryAdded.getMenuEntry();
 		if (me.getWidget() != null && me.getWidget().getId() == ComponentID.EQUIPMENT_CAPE)
 		{
-			var item = me.getWidget().getChild(1);
-			var swap = teleportSwaps.get(item.getItemId())
+			Widget item = me.getWidget().getChild(1);
+			TeleportSwap swap = teleportSwaps.get(item.getItemId())
 				.stream()
 				.filter(ts -> ts.worn)
 				.filter(ts -> ts.option.equals(me.getOption()))
@@ -2164,7 +2164,7 @@ public class MenuEntrySwapperPlugin extends Plugin
 		}
 		else if (me.getWidget() != null && me.getWidget().getId() == ComponentID.INVENTORY_CONTAINER)
 		{
-			var swap = teleportSwaps.get(me.getItemId())
+			TeleportSwap swap = teleportSwaps.get(me.getItemId())
 				.stream()
 				.filter(ts -> ts.held)
 				.filter(ts -> ts.option.equals(me.getOption()))

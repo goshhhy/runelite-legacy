@@ -212,7 +212,7 @@ class DevToolsOverlay extends Overlay
 				" (A: " + npc.getAnimation() + ") (P: " + npc.getPoseAnimation() + ") (G: " + npc.getGraphic() + ")";
 			if (npc.getModelOverrides() != null)
 			{
-				var mo = npc.getModelOverrides();
+				net.runelite.api.NpcOverrides mo = npc.getModelOverrides();
 				if (mo.getModelIds() != null)
 				{
 					text += " (M: " + Arrays.toString(mo.getModelIds()) + ")";

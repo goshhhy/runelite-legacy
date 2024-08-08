@@ -240,7 +240,7 @@ public class ObjectIndicatorsPlugin extends Plugin
 		}
 
 		int idx = -1;
-		final var marked = objects.stream().filter(o -> o.getTileObject() == tileObject).findFirst();
+		final java.util.Optional<ColorTileObject> marked = objects.stream().filter(o -> o.getTileObject() == tileObject).findFirst();
 		client.createMenuEntry(idx--)
 			.setOption(marked.isPresent() ? UNMARK : MARK)
 			.setTarget(event.getTarget())
@@ -335,7 +335,7 @@ public class ObjectIndicatorsPlugin extends Plugin
 			.onClick(e -> SwingUtilities.invokeLater(() ->
 			{
 				// default fill color depends on the highlight type. just use a=50 from hull fill.
-				var previousColor = MoreObjects.firstNonNull(colorTileObject.getFillColor(), new Color(0, 0, 0, 50));
+				Color previousColor = MoreObjects.firstNonNull(colorTileObject.getFillColor(), new Color(0, 0, 0, 50));
 
 				RuneliteColorPicker colorPicker = colorPickerManager.create(SwingUtilities.windowForComponent((Applet) client),
 					previousColor, "Mark Fill Color", false);
@@ -487,7 +487,7 @@ public class ObjectIndicatorsPlugin extends Plugin
 					&& objectPoint.getId() == object.getId())
 			{
 				log.debug("Marking object {} due to matching {}", object, objectPoint);
-				var flags =
+				int flags =
 					(objectPoint.getHull() == Boolean.TRUE ? HF_HULL : 0) |
 					(objectPoint.getOutline() == Boolean.TRUE ? HF_OUTLINE : 0) |
 					(objectPoint.getClickbox() == Boolean.TRUE ? HF_CLICKBOX : 0) |
@@ -681,10 +681,10 @@ public class ObjectIndicatorsPlugin extends Plugin
 		List<Color> colors = new ArrayList<>();
 		for (int region : client.getMapRegions())
 		{
-			var points = this.points.get(region);
+			Set<ObjectPoint> points = this.points.get(region);
 			if (points != null)
 			{
-				for (var p : points)
+				for (ObjectPoint p : points)
 				{
 					Color c = getColor.apply(p);
 					if (c != null & !colors.contains(c))

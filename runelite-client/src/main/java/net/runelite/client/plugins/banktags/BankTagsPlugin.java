@@ -371,8 +371,8 @@ public class BankTagsPlugin extends Plugin implements BankTagsService
 				// recomputing the scroll height.
 				if (activeTag != null && (tabInterface.isTagTabActive() || config.removeSeparators() || activeTag.layout() != null))
 				{
-					var stack = client.getIntStack();
-					var sz = client.getIntStackSize();
+					int[] stack = client.getIntStack();
+					int sz = client.getIntStackSize();
 					stack[sz - 1] = 1; // use single tab view mode
 				}
 				break;

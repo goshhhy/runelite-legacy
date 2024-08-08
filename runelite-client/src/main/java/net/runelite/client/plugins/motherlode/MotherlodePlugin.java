@@ -247,7 +247,7 @@ public class MotherlodePlugin extends Plugin
 
 	private void broadcastLootItem(int itemId)
 	{
-		var lootEvent = PluginLootReceived.builder()
+		PluginLootReceived lootEvent = PluginLootReceived.builder()
 			.source(this)
 			.name("Motherlode Mine")
 			.type(LootRecordType.EVENT)
@@ -417,7 +417,7 @@ public class MotherlodePlugin extends Plugin
 		Multiset<Integer> delta = Multisets.difference(current, inventorySnapshot);
 
 		// Advertise the loot
-		var lootEvent = PluginLootReceived.builder()
+		PluginLootReceived lootEvent = PluginLootReceived.builder()
 			.source(this)
 			.name("Motherlode Mine")
 			.type(LootRecordType.EVENT)

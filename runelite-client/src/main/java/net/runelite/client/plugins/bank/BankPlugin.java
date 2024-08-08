@@ -306,13 +306,13 @@ public class BankPlugin extends Plugin
 		else if (event.getGroupId() == InterfaceID.CLANRANK_POPUP // also the Jagex account ad in the bank
 			&& config.blockJagexAccountAd())
 		{
-			var wn = client.getComponentTable()
+			net.runelite.api.WidgetNode wn = client.getComponentTable()
 				.get(ComponentID.BANK_POPUP);
 			if (wn != null)
 			{
 				clientThread.invokeLater(() ->
 				{
-					var w = client.getWidget(InterfaceID.CLANRANK_POPUP, 4).getChild(1);
+					Widget w = client.getWidget(InterfaceID.CLANRANK_POPUP, 4).getChild(1);
 					// this is also re-used by the clear all bank fillers popup
 					if (w.getText().equals("Want more bank space?"))
 					{

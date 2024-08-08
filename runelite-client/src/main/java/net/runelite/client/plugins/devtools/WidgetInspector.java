@@ -522,7 +522,7 @@ class WidgetInspector extends DevToolsFrame
 			str += "[" + widget.getIndex() + "]";
 		}
 
-		var name = getWidgetName(id);
+		String name = getWidgetName(id);
 		if (name != null)
 		{
 			str += " " + name;

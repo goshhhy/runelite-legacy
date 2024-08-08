@@ -344,7 +344,7 @@ public class TabInterface
 		{
 			// the server will resync the last opened vanilla tab when the bank is opened
 			client.setVarbit(Varbits.CURRENT_BANK_TAB, 0);
-			var tab = config.tab();
+			String tab = config.tab();
 			activeTab = tabManager.find(tab);
 			tagTabActive = TAB_MENU_KEY.equals(tab);
 			plugin.open(activeTab);
@@ -1211,7 +1211,7 @@ public class TabInterface
 		// remove the tag tabs but keep the buttons and scroll component
 		parent.setChildren(Arrays.copyOf(parent.getChildren(), TAGTAB_CHILD_OFFSET));
 
-		var tabs = tabManager.getTabs();
+		List<TagTab> tabs = tabManager.getTabs();
 		for (TagTab tab : tabs)
 		{
 			Widget background = createGraphic(parent, ColorUtil.wrapWithColorTag(tab.getTag(), HILIGHT_COLOR),

@@ -651,7 +651,7 @@ public class LootTrackerPlugin extends Plugin
 	private Integer getLootWorldId()
 	{
 		// For the wiki to determine drop rates based on dmm brackets / identify leagues drops
-		var worldType = client.getWorldType();
+		java.util.EnumSet<WorldType> worldType = client.getWorldType();
 		return worldType.contains(WorldType.SEASONAL)
 			|| worldType.contains(WorldType.TOURNAMENT_WORLD)
 			|| worldType.contains(WorldType.BETA_WORLD) ? client.getWorld() : null;
@@ -660,7 +660,7 @@ public class LootTrackerPlugin extends Plugin
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned npcDespawned)
 	{
-		var npc = npcDespawned.getNpc();
+		NPC npc = npcDespawned.getNpc();
 		if (npc.getId() == NpcID.THE_WHISPERER || npc.getId() == NpcID.THE_WHISPERER_12206)
 		{
 			// Whisperer death:
@@ -676,7 +676,7 @@ public class LootTrackerPlugin extends Plugin
 
 			// collect all items on z=0
 			Multiset<Integer> ground = HashMultiset.create();
-			var scene = client.getScene();
+			net.runelite.api.Scene scene = client.getScene();
 			Tile[][] p0 = scene.getTiles()[0];
 			Arrays.stream(p0)
 				.flatMap(Arrays::stream)
@@ -718,7 +718,7 @@ public class LootTrackerPlugin extends Plugin
 				return;
 			}
 
-			var region = WorldPoint.fromLocalInstance(client, client.getLocalPlayer().getLocalLocation()).getRegionID();
+			int region = WorldPoint.fromLocalInstance(client, client.getLocalPlayer().getLocalLocation()).getRegionID();
 			if (region != groundSnapshotRegion)
 			{
 				log.debug("Ground snapshot: In wrong region {} != {}", region, groundSnapshotRegion);
@@ -726,7 +726,7 @@ public class LootTrackerPlugin extends Plugin
 			}
 
 			Multiset<Integer> ground = HashMultiset.create();
-			var scene = client.getScene();
+			net.runelite.api.Scene scene = client.getScene();
 			Tile[][] p0 = scene.getTiles()[0];
 			Arrays.stream(p0)
 				.flatMap(Arrays::stream)
@@ -736,7 +736,7 @@ public class LootTrackerPlugin extends Plugin
 				.flatMap(Collection::stream)
 				.forEach(item -> ground.add(item.getId(), item.getQuantity()));
 
-			var diff = Multisets.difference(ground, groundSnapshot);
+			Multiset<Integer> diff = Multisets.difference(ground, groundSnapshot);
 			if (diff.isEmpty())
 			{
 				// loot is not spawned yet
@@ -747,7 +747,7 @@ public class LootTrackerPlugin extends Plugin
 			log.debug("Ground snapshot: Loot received {} on cycle {}", diff, client.getGameCycle());
 
 			// convert to item stack
-			var items = diff.entrySet().stream()
+			List<ItemStack> items = diff.entrySet().stream()
 				.map(e -> new ItemStack(e.getElement(), e.getCount()))
 				.collect(Collectors.toList());
 			addLoot(groundSnapshotName, groundSnapshotCombatLevel, LootRecordType.NPC, null, items);
@@ -763,7 +763,7 @@ public class LootTrackerPlugin extends Plugin
 	{
 		if (client.getWorldType().contains(WorldType.SEASONAL))
 		{
-			var md = new NpcMetadata();
+			NpcMetadata md = new NpcMetadata();
 			md.setId(npc.getId());
 			md.setR1(client.getVarbitValue(Varbits.LEAGUE_RELIC_1));
 			md.setR2(client.getVarbitValue(Varbits.LEAGUE_RELIC_2));
@@ -970,7 +970,7 @@ public class LootTrackerPlugin extends Plugin
 	@Subscribe
 	public void onChatMessage(ChatMessage event)
 	{
-		var chatType = event.getType();
+		ChatMessageType chatType = event.getType();
 		if (chatType != ChatMessageType.GAMEMESSAGE && chatType != ChatMessageType.SPAM
 			&& chatType != ChatMessageType.MESBOX)
 		{

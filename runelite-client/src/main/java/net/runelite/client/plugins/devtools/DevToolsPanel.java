@@ -147,7 +147,7 @@ class DevToolsPanel extends PluginPanel
 		notificationBtn.addActionListener(e ->
 			scheduledExecutorService.schedule(() ->
 			{
-				var notif = new Notification()
+				Notification notif = new Notification()
 					.withEnabled(true)
 					.withTrayIconType(TrayIcon.MessageType.ERROR);
 				notifier.notify(notif, "Wow!");

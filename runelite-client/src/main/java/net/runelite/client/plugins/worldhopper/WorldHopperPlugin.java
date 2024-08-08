@@ -506,7 +506,7 @@ public class WorldHopperPlugin extends Plugin
 		{
 			clientThread.invokeLater(() ->
 			{
-				var locationEnum = client.getGameState().getState() >= GameState.LOGIN_SCREEN.getState() ? client.getEnum(EnumID.WORLD_LOCATIONS) : null;
+				EnumComposition locationEnum = client.getGameState().getState() >= GameState.LOGIN_SCREEN.getState() ? client.getEnum(EnumID.WORLD_LOCATIONS) : null;
 				SwingUtilities.invokeLater(() -> panel.populate(worldResult.getWorlds(), locationEnum));
 			});
 		}

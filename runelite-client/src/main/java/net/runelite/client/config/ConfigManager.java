@@ -463,13 +463,13 @@ public class ConfigManager
 
 	private static void removeDuplicateProfiles(ProfileManager.Lock lock)
 	{
-		var seen = new HashMap<Long, ConfigProfile>();
-		for (var it = lock.getProfiles().iterator(); it.hasNext(); )
+		HashMap<Long, ConfigProfile> seen = new HashMap<Long, ConfigProfile>();
+		for (java.util.Iterator<ConfigProfile> it = lock.getProfiles().iterator(); it.hasNext(); )
 		{
-			var profile = it.next();
+			ConfigProfile profile = it.next();
 			if (seen.containsKey(profile.getId()))
 			{
-				var existing = seen.get(profile.getId());
+				ConfigProfile existing = seen.get(profile.getId());
 				log.warn("Duplicate profiles detected: {} and {}. Removing the latter.",
 					existing, profile);
 				it.remove();
@@ -483,7 +483,7 @@ public class ConfigManager
 
 	private static void fixRsProfileName(ProfileManager.Lock lock)
 	{
-		var rsProfile = lock.findProfile(RSPROFILE_ID);
+		ConfigProfile rsProfile = lock.findProfile(RSPROFILE_ID);
 		if (rsProfile != null && !rsProfile.getName().equals(RSPROFILE_NAME))
 		{
 			log.warn("renaming {} to {}", rsProfile, RSPROFILE_NAME);

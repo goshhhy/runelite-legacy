@@ -97,13 +97,13 @@ public class ChatIconManager
 	@Subscribe
 	private void onGameStateChanged(GameStateChanged gameStateChanged)
 	{
-		var state = gameStateChanged.getGameState();
+		GameState state = gameStateChanged.getGameState();
 		if (state == GameState.STARTING)
 		{
 			friendsChatOffset = clanOffset = -1;
 			synchronized (this)
 			{
-				for (var icon : icons)
+				for (ChatIcon icon : icons)
 				{
 					icon.idx = -1;
 				}
@@ -125,7 +125,7 @@ public class ChatIconManager
 		{
 			throw new IllegalArgumentException("invalid image");
 		}
-		var i = ImageUtil.getImageIndexedSprite(image, client);
+		IndexedSprite i = ImageUtil.getImageIndexedSprite(image, client);
 		icons.add(new ChatIcon(-1, i));
 		clientThread.invokeLater(this::refreshIcons);
 		return icons.size() - 1;
@@ -172,16 +172,16 @@ public class ChatIconManager
 
 	private synchronized void refreshIcons()
 	{
-		var chatIcons = client.getModIcons();
+		IndexedSprite[] chatIcons = client.getModIcons();
 		if (chatIcons == null)
 		{
 			return;
 		}
 
-		final var offset = chatIcons.length;
+		final int offset = chatIcons.length;
 
 		int newIcons = 0;
-		for (var icon : icons)
+		for (ChatIcon icon : icons)
 		{
 			assert icon.idx < offset;
 			if (icon.idx == -1)
@@ -195,10 +195,10 @@ public class ChatIconManager
 			return;
 		}
 
-		var newChatIcons = Arrays.copyOf(chatIcons, chatIcons.length + newIcons);
+		IndexedSprite[] newChatIcons = Arrays.copyOf(chatIcons, chatIcons.length + newIcons);
 
 		newIcons = 0;
-		for (var icon : icons)
+		for (ChatIcon icon : icons)
 		{
 			if (icon.idx == -1)
 			{

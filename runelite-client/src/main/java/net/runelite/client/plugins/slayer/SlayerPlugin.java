@@ -277,7 +277,7 @@ public class SlayerPlugin extends Plugin
 	{
 		if (developerMode && commandExecuted.getCommand().equalsIgnoreCase("task"))
 		{
-			var task = String.join(" ", commandExecuted.getArguments());
+			String task = String.join(" ", commandExecuted.getArguments());
 			setTask(task, 42, 42);
 			log.debug("Set task to {}", task);
 		}
