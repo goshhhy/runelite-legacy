@@ -1,25 +1,22 @@
-![](https://runelite.net/img/logo.png)
-# runelite [![CI](https://github.com/runelite/runelite/workflows/CI/badge.svg)](https://github.com/runelite/runelite/actions?query=workflow%3ACI+branch%3Amaster) [![Discord](https://img.shields.io/discord/301497432909414422.svg)](https://discord.gg/ArdAhnN)
+****![](https://runelite.net/img/logo.png)
+# runelite-legacy
 
-RuneLite is a free, open source OldSchool RuneScape client.
+runelite-legacy is a set of patches for [RuneLite](https://github.com/runelite/runelite) to reduce the minimum required
+version of Java. Unmodified RuneLite requires Java 11. with these changes, it can currently be built to target Java 9.
+My goal is to reduce the requirement to at least Java 1.7 and preferably Java 1.6, even if this requires disabling some
+functionality, while still allowing the Java 11 version to be built and retain all of its features.
 
-If you have any questions, please join our IRC channel on [irc.rizon.net #runelite](http://qchat.rizon.net/?channels=runelite&uio=d4) or alternatively our [Discord](https://discord.gg/ArdAhnN) server.
+the patches are minimal, and do not add any new features. some features may be disabled if they rely on language
+features or libraries not available in earlier versions of Java. there should be no change whatsoever in behavior of
+the client otherwise.
 
-## Project Layout
+my intent is for these changes to be suitable for merging into the official runelite client, in order to allow an
+officially supported build to exist that can run on older computers and operating systems that do not support newer
+versions of Java. yes, this is all so that i can play OSRS on my PowerBook G4, like the good old days.
 
-- [cache](cache/src/main/java/net/runelite/cache) - Libraries used for reading/writing cache files, as well as the data in it
-- [runelite-api](runelite-api/src/main/java/net/runelite/api) - RuneLite API, interfaces for accessing the client
-- [runelite-client](runelite-client/src/main/java/net/runelite/client) - Game client with plugins
-
-## Usage
-
-Open the project in your IDE as a Maven project, build the root module and then run the RuneLite class in runelite-client.  
-For more information visit the [RuneLite Wiki](https://github.com/runelite/runelite/wiki).
+I try to encapsulate changes of the same issue (e.g. occurrences of language features not present in older Java) into
+the same commit, in order to keep things clean and easy to review.
 
 ### License
 
-RuneLite is licensed under the BSD 2-clause license. See the license header in the respective file to be sure.
-
-## Contribute and Develop
-
-We've set up a separate document for our [contribution guidelines](https://github.com/runelite/runelite/blob/master/.github/CONTRIBUTING.md).
+runelite-legacy is licensed under the BSD 2-clause license. See the license header in the respective file to be sure.****
