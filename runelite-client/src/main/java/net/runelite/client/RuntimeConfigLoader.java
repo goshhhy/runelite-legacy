@@ -116,9 +116,9 @@ public class RuntimeConfigLoader implements Supplier<RuntimeConfig>
 			}
 
 			@Override
-			public void onResponse(Call call, Response response)
+			public void onResponse(Call call, Response r)
 			{
-				try (response)
+				try (Response response = r)
 				{
 					RuntimeConfig config = RuneLiteAPI.GSON.fromJson(response.body().charStream(), RuntimeConfig.class);
 					future.complete(config);

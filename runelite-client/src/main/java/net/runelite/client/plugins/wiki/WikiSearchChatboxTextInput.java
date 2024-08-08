@@ -132,10 +132,10 @@ public class WikiSearchChatboxTextInput extends ChatboxTextInput
 					}
 
 					@Override
-					public void onResponse(Call call, Response response) throws IOException
+					public void onResponse(Call call, Response r) throws IOException
 					{
 						String body = response.body().string();
-						try (response)
+						try (Response response = r)
 						{
 							JsonArray jar = new JsonParser().parse(body).getAsJsonArray();
 							List<String> apredictions = gson.fromJson(jar.get(1), new TypeToken<List<String>>()

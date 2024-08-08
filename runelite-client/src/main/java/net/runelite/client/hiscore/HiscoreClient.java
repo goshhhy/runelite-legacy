@@ -88,9 +88,9 @@ public class HiscoreClient
 			}
 
 			@Override
-			public void onResponse(Call call, Response response) throws IOException
+			public void onResponse(Call call, Response r) throws IOException
 			{
-				try (response)
+				try (Response response = r)
 				{
 					future.complete(processResponse(username, response));
 				}

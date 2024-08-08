@@ -419,9 +419,9 @@ class WikiDpsManager
 			}
 
 			@Override
-			public void onResponse(Call call, Response response)
+			public void onResponse(Call call, Response r)
 			{
-				try (response)
+				try (Response response = r)
 				{
 					if (response.isSuccessful() && response.body() != null)
 					{

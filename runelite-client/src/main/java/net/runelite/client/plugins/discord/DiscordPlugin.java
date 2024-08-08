@@ -236,9 +236,9 @@ public class DiscordPlugin extends Plugin
 			}
 
 			@Override
-			public void onResponse(Call call, Response response) throws IOException
+			public void onResponse(Call call, Response r) throws IOException
 			{
-				try (response)
+				try (Response response = r)
 				{
 					if (!response.isSuccessful())
 					{
