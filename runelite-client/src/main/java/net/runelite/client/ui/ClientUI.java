@@ -753,7 +753,7 @@ public class ClientUI
 			return false;
 		}
 
-		for (var listener : keyListeners)
+		for (KeyListener listener : keyListeners)
 		{
 			switch (ev.getID())
 			{
