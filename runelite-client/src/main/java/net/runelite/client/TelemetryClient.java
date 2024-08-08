@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
@@ -94,7 +95,7 @@ public class TelemetryClient
 					continue;
 				}
 
-				String hsErr = Files.readString(f.toPath());
+				String hsErr = new String(Files.readAllBytes(f.toPath()), StandardCharsets.UTF_8);
 
 				String destName = f.getName().substring(0, f.getName().length() - 4) + "_r.log";
 				File dest = new File(logsDir, destName);
