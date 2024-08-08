@@ -67,11 +67,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.image.BufferedImage;
 import java.time.Duration;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -568,6 +564,8 @@ public class ClientUI
 					// the native title color is determined by the application appearance,
 					// which will lead to grey text on a black background if the appearance
 					// is light mode.
+
+					/* not available in Java <11
 					if (Runtime.version().feature() >= 17)
 					{
 						rp.putClientProperty("apple.awt.windowTitleVisible", false);
@@ -577,6 +575,7 @@ public class ClientUI
 						rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICONIFFY, false);
 						rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
 					}
+					 */
 
 					menuBar.setBorder(new EmptyBorder(3, 70, 3, 10));
 				}
@@ -1393,7 +1392,7 @@ public class ClientUI
 	{
 		// Force heavy-weight popups/tooltips.
 		// Prevents them from being obscured by the game applet.
-		var tooltipManager = ToolTipManager.sharedInstance();
+		ToolTipManager tooltipManager = ToolTipManager.sharedInstance();
 		tooltipManager.setLightWeightPopupEnabled(false);
 		tooltipManager.setInitialDelay(300);
 		tooltipManager.setDismissDelay(10_000);
