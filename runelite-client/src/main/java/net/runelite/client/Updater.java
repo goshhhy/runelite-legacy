@@ -128,7 +128,7 @@ class Updater
 		}
 
 		ProcessHandle current = ProcessHandle.current();
-		if (current.info().command().isEmpty())
+		if (!current.info().command().isPresent())
 		{
 			log.debug("Running process has no command");
 			return;
