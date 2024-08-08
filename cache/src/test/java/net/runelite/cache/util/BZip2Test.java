@@ -42,7 +42,7 @@ public class BZip2Test
 	{
 		try
 		{
-			var l = LibBZip2.INSTANCE;
+			LibBZip2 l = LibBZip2.INSTANCE;
 		}
 		catch (UnsatisfiedLinkError ex)
 		{

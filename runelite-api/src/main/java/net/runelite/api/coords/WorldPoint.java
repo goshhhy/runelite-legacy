@@ -175,7 +175,7 @@ public class WorldPoint
 	 */
 	public static WorldPoint fromLocal(Client client, LocalPoint local)
 	{
-		var wv = client.getWorldView(local.getWorldView());
+		WorldView wv = client.getWorldView(local.getWorldView());
 		return fromLocal(wv, local.getX(), local.getY(), wv.getPlane());
 	}
 
@@ -240,7 +240,7 @@ public class WorldPoint
 	 */
 	public static WorldPoint fromLocalInstance(Client client, LocalPoint localPoint)
 	{
-		var wv = client.getWorldView(localPoint.getWorldView());
+		WorldView wv = client.getWorldView(localPoint.getWorldView());
 		return fromLocalInstance(client, localPoint, wv.getPlane());
 	}
 
@@ -255,7 +255,7 @@ public class WorldPoint
 	 */
 	public static WorldPoint fromLocalInstance(Client client, LocalPoint localPoint, int plane)
 	{
-		var wv = client.getWorldView(localPoint.getWorldView());
+		WorldView wv = client.getWorldView(localPoint.getWorldView());
 
 		if (wv.isInstance())
 		{

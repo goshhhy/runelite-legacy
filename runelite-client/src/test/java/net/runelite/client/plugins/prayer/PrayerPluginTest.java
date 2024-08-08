@@ -200,7 +200,7 @@ public class PrayerPluginTest
 		reset(client);
 		when(client.getBoostedSkillLevel(Skill.PRAYER)).thenReturn(99);
 		when(client.isPrayerActive(prayer.getPrayer())).thenReturn(true);
-		var est = prayerPlugin.getEstimatedTimeRemaining(false);
+		String est = prayerPlugin.getEstimatedTimeRemaining(false);
 		assertEquals(time, est);
 	}
 }

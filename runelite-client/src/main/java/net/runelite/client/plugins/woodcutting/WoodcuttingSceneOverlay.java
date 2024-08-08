@@ -227,8 +227,8 @@ class WoodcuttingSceneOverlay extends Overlay
 	{
 		if (plugin.getFoxTrap() != null && config.highlightFoxTrap())
 		{
-			var foxTrap = plugin.getFoxTrap();
-			var poly = foxTrap.getCanvasTilePoly();
+			NPC foxTrap = plugin.getFoxTrap();
+			Polygon poly = foxTrap.getCanvasTilePoly();
 			if (poly != null)
 			{
 				OverlayUtil.renderPolygon(graphics, poly, Color.RED);
@@ -240,11 +240,11 @@ class WoodcuttingSceneOverlay extends Overlay
 	{
 		if (!plugin.getPheasantNests().isEmpty() && config.highlightPheasantNest())
 		{
-			for (var nest : plugin.getPheasantNests())
+			for (GameObject nest : plugin.getPheasantNests())
 			{
 				if (nest.getId() == ObjectID.PHEASANT_NEST_49937)
 				{
-					var poly = nest.getCanvasTilePoly();
+					Polygon poly = nest.getCanvasTilePoly();
 					if (poly != null)
 					{
 						OverlayUtil.renderPolygon(graphics, poly, Color.GREEN);
@@ -252,10 +252,10 @@ class WoodcuttingSceneOverlay extends Overlay
 				}
 			}
 
-			var forester = plugin.getFreakyForester();
+			NPC forester = plugin.getFreakyForester();
 			if (forester != null)
 			{
-				var poly = forester.getCanvasTilePoly();
+				Polygon poly = forester.getCanvasTilePoly();
 				if (poly != null)
 				{
 					OverlayUtil.renderPolygon(graphics, poly, Color.GREEN);
@@ -268,8 +268,8 @@ class WoodcuttingSceneOverlay extends Overlay
 	{
 		if (plugin.getUnfinishedBeeHive() != null && config.highlightBeeHive())
 		{
-			var beehive = plugin.getUnfinishedBeeHive();
-			var poly = beehive.getCanvasTilePoly();
+			NPC beehive = plugin.getUnfinishedBeeHive();
+			Polygon poly = beehive.getCanvasTilePoly();
 			if (poly != null)
 			{
 				OverlayUtil.renderPolygon(graphics, poly, Color.ORANGE);
@@ -279,10 +279,10 @@ class WoodcuttingSceneOverlay extends Overlay
 
 	private void renderEnchantmentRitual(Graphics2D graphics)
 	{
-		var solution = plugin.solveCircles();
+		NPC solution = plugin.solveCircles();
 		if (solution != null && config.highlightRitualCircle())
 		{
-			var poly = solution.getCanvasTilePoly();
+			Polygon poly = solution.getCanvasTilePoly();
 			if (poly != null)
 			{
 				OverlayUtil.renderPolygon(graphics, poly, Color.GREEN);

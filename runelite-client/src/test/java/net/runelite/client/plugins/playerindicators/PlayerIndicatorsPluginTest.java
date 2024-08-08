@@ -107,7 +107,7 @@ public class PlayerIndicatorsPluginTest
 		String useCmb = "<col=ff9040>Earth rune</col>" + col + " -> " + cmbLevel;
 		String useSkill = "<col=ff9040>Earth rune</col>" + col + " -> " + skillTotal;
 
-		var deco = new PlayerIndicatorsService.Decorations(null, null, Color.RED);
+		PlayerIndicatorsService.Decorations deco = new PlayerIndicatorsService.Decorations(null, null, Color.RED);
 
 		assertEquals("<col=ff0000>title0RuneLitetitle1<col=ff>  (level-126)title2", plugin.decorateTarget(cmbLevel, deco));
 		assertEquals("<col=ff0000>title0RuneLitetitle1  (skill-1234)title2", plugin.decorateTarget(skillTotal, deco));

@@ -443,7 +443,7 @@ public class Perspective
 		int sceneY = point.getSceneY();
 		if (sceneX >= 0 && sceneY >= 0 && sceneX < SCENE_SIZE && sceneY < SCENE_SIZE)
 		{
-			var wv = client.getWorldView(point.getWorldView());
+			WorldView wv = client.getWorldView(point.getWorldView());
 			byte[][][] tileSettings = wv.getTileSettings();
 			int[][][] tileHeights = wv.getTileHeights();
 
@@ -547,7 +547,7 @@ public class Perspective
 	{
 		final int msx = localLocation.getSceneX() + ESCENE_OFFSET;
 		final int msy = localLocation.getSceneY() + ESCENE_OFFSET;
-		final var wv = client.getWorldView(localLocation.getWorldView());
+		final WorldView wv = client.getWorldView(localLocation.getWorldView());
 
 		if (msx < 0 || msy < 0 || msx >= EXTENDED_SCENE_SIZE || msy >= EXTENDED_SCENE_SIZE || wv == null)
 		{
@@ -560,7 +560,7 @@ public class Perspective
 			plane = wv.getPlane();
 		}
 
-		var scene = wv.getScene();
+		Scene scene = wv.getScene();
 		final byte[][][] tileSettings = scene.getExtendedTileSettings();
 
 		int tilePlane = plane;
@@ -628,7 +628,7 @@ public class Perspective
 			return null;
 		}
 
-		var wv = client.getWorldView(localLocation.getWorldView());
+		WorldView wv = client.getWorldView(localLocation.getWorldView());
 		if (wv == null)
 		{
 			return null;
@@ -666,7 +666,7 @@ public class Perspective
 		@Nonnull BufferedImage image,
 		int zOffset)
 	{
-		var wv = client.getWorldView(localLocation.getWorldView());
+		WorldView wv = client.getWorldView(localLocation.getWorldView());
 		if (wv == null)
 		{
 			return null;
@@ -729,7 +729,7 @@ public class Perspective
 		@Nonnull SpritePixels sprite,
 		int zOffset)
 	{
-		var wv = client.getWorldView(localLocation.getWorldView());
+		WorldView wv = client.getWorldView(localLocation.getWorldView());
 		if (wv == null)
 		{
 			return null;

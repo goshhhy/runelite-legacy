@@ -107,9 +107,9 @@ public class ComponentMojo extends AbstractMojo
 			throw new MojoExecutionException("unable to parse component file " + file.getName());
 		}
 
-		for (var entry : result.entrySet())
+		for (java.util.Map.Entry<String, Object> entry : result.entrySet())
 		{
-			var interfaceName = entry.getKey();
+			String interfaceName = entry.getKey();
 			TomlTable tbl = (TomlTable) entry.getValue();
 
 			if (!tbl.contains("id"))
@@ -131,9 +131,9 @@ public class ComponentMojo extends AbstractMojo
 
 			addField(interfaceType, interfaceName.toUpperCase(Locale.ENGLISH), interfaceId, null);
 
-			for (var entry2 : tbl.entrySet())
+			for (java.util.Map.Entry<String, Object> entry2 : tbl.entrySet())
 			{
-				var componentName = entry2.getKey();
+				String componentName = entry2.getKey();
 				if (componentName.equals("id"))
 				{
 					continue;
@@ -145,8 +145,8 @@ public class ComponentMojo extends AbstractMojo
 					throw new MojoExecutionException("component id out of range for " + componentName);
 				}
 
-				var fullName = interfaceName.toUpperCase(Locale.ENGLISH) + "_" + componentName.toUpperCase(Locale.ENGLISH);
-				var comment = interfaceId + ":" + id;
+				String fullName = interfaceName.toUpperCase(Locale.ENGLISH) + "_" + componentName.toUpperCase(Locale.ENGLISH);
+				String comment = interfaceId + ":" + id;
 				int componentId = (interfaceId << 16) | id;
 
 				if (seenComponents.contains(componentId))

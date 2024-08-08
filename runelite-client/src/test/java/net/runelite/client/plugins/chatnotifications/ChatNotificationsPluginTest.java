@@ -86,7 +86,7 @@ public class ChatNotificationsPluginTest
 	{
 		when(config.highlightWordsString()).thenReturn("Deathbeam, Deathbeam OSRS , test");
 
-		var message = "Deathbeam, Deathbeam OSRS";
+		String message = "Deathbeam, Deathbeam OSRS";
 		MessageNode messageNode = mock(MessageNode.class);
 		when(messageNode.getValue()).thenReturn(message);
 
@@ -107,7 +107,7 @@ public class ChatNotificationsPluginTest
 	{
 		when(config.highlightRegexString()).thenReturn("brandie+\ntest");
 
-		var message = "brandieeee testing";
+		String message = "brandieeee testing";
 		MessageNode messageNode = mock(MessageNode.class);
 		when(messageNode.getValue()).thenReturn(message);
 
@@ -128,7 +128,7 @@ public class ChatNotificationsPluginTest
 	{
 		when(config.highlightRegexString()).thenReturn("brandie+\nwillNotMatch");
 
-		var message = "brandieeee testing";
+		String message = "brandieeee testing";
 		MessageNode messageNode = mock(MessageNode.class);
 		when(messageNode.getValue()).thenReturn(message);
 
