@@ -36,7 +36,8 @@ import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.Desktop;
+// LEGACY: commented out because it doesn't exist before Java 9
+//import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -51,10 +52,12 @@ import java.awt.LayoutManager2;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.SystemTray;
-import java.awt.Taskbar;
+// LEGACY: commented out because it doesn't exist before Java 9
+//import java.awt.Taskbar;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
-import java.awt.desktop.QuitStrategy;
+// LEGACY: commented out because it doesn't exist before Java 9
+//import java.awt.desktop.QuitStrategy;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
@@ -348,8 +351,11 @@ public class ClientUI
 			{
 				// Change the default quit strategy to CLOSE_ALL_WINDOWS so that ctrl+q
 				// triggers the listener below instead of exiting.
-				Desktop.getDesktop()
-					.setQuitStrategy(QuitStrategy.CLOSE_ALL_WINDOWS);
+
+				// LEGACY: commented out because it doesn't exist before Java 9
+
+				//Desktop.getDesktop()
+				//	.setQuitStrategy(QuitStrategy.CLOSE_ALL_WINDOWS);
 			}
 			frame.addWindowListener(new WindowAdapter()
 			{
@@ -456,17 +462,17 @@ public class ClientUI
 					if (e.getButton() == MouseEvent.BUTTON3)
 					{
 						int index = 0;
-						for (var navBtn : sidebarEntries)
+						for (NavigationButton navBtn : sidebarEntries)
 						{
 							Rectangle bounds = sidebar.getBoundsAt(index++);
 							if (bounds != null && bounds.contains(e.getX(), e.getY()))
 							{
 								if (navBtn.getPopup() != null)
 								{
-									var menu = new JPopupMenu();
+									JPopupMenu menu = new JPopupMenu();
 									navBtn.getPopup().forEach((name, cb) ->
 									{
-										var menuItem = new JMenuItem(name);
+										JMenuItem menuItem = new JMenuItem(name);
 										menuItem.addActionListener(ev -> cb.run());
 										menu.add(menuItem);
 									});
@@ -942,6 +948,7 @@ public class ClientUI
 	 */
 	public void flashTaskbar()
 	{
+		/* LEGACY: not available in Java 8
 		Taskbar taskbar = Taskbar.getTaskbar();
 		if (taskbar.isSupported(Taskbar.Feature.USER_ATTENTION_WINDOW))
 		{
@@ -951,6 +958,7 @@ public class ClientUI
 		{
 			log.debug("USER_ATTENTION_WINDOW is not supported");
 		}
+		 */
 	}
 
 	/**
