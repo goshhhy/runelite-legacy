@@ -490,24 +490,21 @@ public class ClientUI
 			frame.setContentPane(content);
 
 			// Add key listener
-			keyListeners = List.of(
-				new HotkeyListener(config::sidebarToggleKey)
-				{
-					@Override
-					public void hotkeyPressed()
-					{
-						toggleSidebar();
-					}
-				},
-				new HotkeyListener(config::panelToggleKey)
-				{
-					@Override
-					public void hotkeyPressed()
-					{
-						togglePluginPanel();
-					}
-				});
-			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this::dispatchWindowKeyEvent);
+			keyListeners = new ArrayList<>();
+            keyListeners.add(new HotkeyListener(config::sidebarToggleKey) {
+                @Override
+                public void hotkeyPressed() {
+                    toggleSidebar();
+                }
+            });
+            keyListeners.add(new HotkeyListener(config::panelToggleKey) {
+                @Override
+                public void hotkeyPressed() {
+                    togglePluginPanel();
+                }
+            });
+
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this::dispatchWindowKeyEvent);
 
 			frame.addWindowFocusListener(new WindowFocusListener()
 			{

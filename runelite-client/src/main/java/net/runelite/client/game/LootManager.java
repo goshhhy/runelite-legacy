@@ -268,8 +268,9 @@ public class LootManager
 		if (delayedLootAreas == null)
 		{
 			// This is only for nightmare
-			delayedLootAreas = List.of(getAdjacentSquareLootTile(delayedLootNpc).toWorldArea());
-		}
+			delayedLootAreas = new ArrayList<>();
+            delayedLootAreas.add(getAdjacentSquareLootTile(delayedLootNpc).toWorldArea());
+        }
 
 		final List<ItemStack> itemStacks = getItemStacksFromAreas(delayedLootAreas);
 		if (!itemStacks.isEmpty())
@@ -423,7 +424,9 @@ public class LootManager
 			case NpcID.VARDORVIS_12224:
 			{
 				final WorldArea bossArea = npc.getWorldArea();
-				return List.of(new WorldArea(bossArea.getX() - 2, bossArea.getY() - 2, bossArea.getWidth() + 4, bossArea.getHeight() + 4, bossArea.getPlane()));
+                List<WorldArea> worldAreas = new ArrayList<>();
+                worldAreas.add(new WorldArea(bossArea.getX() - 2, bossArea.getY() - 2, bossArea.getWidth() + 4, bossArea.getHeight() + 4, bossArea.getPlane()));
+                return worldAreas;
 			}
 			case NpcID.THE_LEVIATHAN:
 			case NpcID.THE_LEVIATHAN_12215:
@@ -431,12 +434,16 @@ public class LootManager
 				final WorldArea bossArea = npc.getWorldArea();
 				final int expand = 8;
 				final WorldArea expandedArea = new WorldArea(bossArea.getX() - expand, bossArea.getY() - expand, bossArea.getWidth() + expand * 2, bossArea.getHeight() + expand * 2, bossArea.getPlane());
-				return List.of(expandedArea);
+                List<WorldArea> worldAreas = new ArrayList<>();
+                worldAreas.add(expandedArea);
+                return worldAreas;
 			}
 			case NpcID.HOLE_IN_THE_WALL:
 			{
 				final WorldArea bossArea = npc.getWorldArea();
-				return List.of(new WorldArea(bossArea.getX() - 1, bossArea.getY() - 1, 3, 3, bossArea.getPlane()));
+                List<WorldArea> worldAreas = new ArrayList<>();
+                worldAreas.add(new WorldArea(bossArea.getX() - 1, bossArea.getY() - 1, 3, 3, bossArea.getPlane()));
+                return worldAreas;
 			}
 		}
 
